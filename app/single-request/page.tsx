@@ -11,11 +11,11 @@ const userQuery = gql`
   }
 `;
 
-// contextにfetchOptionsを指定した場合は機能する
+// cacheオプションも機能する
 export default async function Page() {
   const {data} = await getClient().query({
     query: userQuery,
-    context: {fetchOptions: {next: {revalidate: 5}}},
+    context: {fetchOptions: {cache: "force-cache"}},
   });
 
   return (
@@ -38,7 +38,7 @@ const userIdQuery = gql`
 const Child = async function () {
   const {data} = await getClient().query({
     query: userIdQuery,
-    context: {fetchOptions: {next: {revalidate: 5}}},
+    context: {fetchOptions: {cache: "force-cache"}},
   });
 
   return (
