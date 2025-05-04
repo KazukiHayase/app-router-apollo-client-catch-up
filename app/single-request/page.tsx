@@ -2,9 +2,6 @@ import gql from "graphql-tag";
 import {getClient} from "@/app/ApolloClient";
 import Link from "next/link";
 
-// Route Segment Configは機能していない
-export const revalidate = 5;
-
 const userQuery = gql`
   query {
     getUser(id: "1") {
@@ -14,8 +11,12 @@ const userQuery = gql`
   }
 `;
 
+// contextにfetchOptionsを指定した場合は機能する
 export default async function Page() {
-  const {data} = await getClient().query({query: userQuery});
+  const {data} = await getClient().query({
+    query: userQuery,
+    context: {fetchOptions: {next: {revalidate: 5}}},
+  });
 
   return (
     <>
@@ -35,7 +36,10 @@ const userIdQuery = gql`
 `;
 
 const Child = async function () {
-  const {data} = await getClient().query({query: userIdQuery});
+  const {data} = await getClient().query({
+    query: userIdQuery,
+    context: {fetchOptions: {next: {revalidate: 5}}},
+  });
 
   return (
     <div>
