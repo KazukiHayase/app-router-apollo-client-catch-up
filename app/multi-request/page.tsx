@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
 import {getClient} from "@/app/ApolloClient";
+import Link from "next/link";
 
 const userIdQuery = gql`
   query {
@@ -13,10 +14,11 @@ export default async function Page() {
   const {data} = await getClient().query({query: userIdQuery});
 
   return (
-    <div>
+    <>
       <p>data received during Home render: {JSON.stringify(data)}</p>
       <Child />
-    </div>
+      <Link href="/">Home</Link>
+    </>
   );
 }
 
