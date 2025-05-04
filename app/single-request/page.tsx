@@ -2,6 +2,9 @@ import gql from "graphql-tag";
 import {getClient} from "@/app/ApolloClient";
 import Link from "next/link";
 
+// Route Segment Configは機能していない
+export const revalidate = 5;
+
 const userQuery = gql`
   query {
     getUser(id: "1") {
