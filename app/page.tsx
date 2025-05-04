@@ -1,42 +1,19 @@
-import gql from "graphql-tag";
-import {getClient} from "./ApolloClient";
+import Link from "next/link";
 
-const userQuery = gql`
-  query {
-    getUser(id: "1") {
-      id
-      name
-    }
-  }
-`;
-
-const userIdQuery = gql`
-  query {
-    getUser(id: "1") {
-      id
-    }
-  }
-`;
-
-export default async function Home() {
-  const {data} = await getClient().query({query: userQuery});
-  /* const {data} = await getClient().query({query: userIdQuery}); */
-
+export default async function Page() {
   return (
-    <div>
-      <p>data received during Home render: {JSON.stringify(data)}</p>
-      <Child />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1rem",
+        height: "100vh",
+      }}
+    >
+      <Link href="/single-request">Single Request Page</Link>
+      <Link href="/multi-request">Multi Request Page</Link>
     </div>
   );
 }
-
-const Child = async function () {
-  /* const {data} = await getClient().query({query: userQuery}); */
-  const {data} = await getClient().query({query: userIdQuery});
-
-  return (
-    <div>
-      <p>data received during Child render: {JSON.stringify(data)}</p>
-    </div>
-  );
-};
