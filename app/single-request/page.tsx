@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+export const revalidate = 10;
+
 const endpoint = "http://localhost:3000/api/rest";
 
 export default async function Page() {
