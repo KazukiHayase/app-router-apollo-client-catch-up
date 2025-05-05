@@ -1,22 +1,10 @@
-import gql from "graphql-tag";
-import {getClient} from "@/app/ApolloClient";
 import Link from "next/link";
 
-const userQuery = gql`
-  query {
-    getUser(id: "1") {
-      id
-      name
-    }
-  }
-`;
+const endpoint = "http://localhost:3000/api/rest";
 
-// cacheオプションも機能する
 export default async function Page() {
-  const {data} = await getClient().query({
-    query: userQuery,
-    context: {fetchOptions: {cache: "force-cache"}},
-  });
+  const res = await fetch(endpoint);
+  const data = await res.json();
 
   return (
     <>
@@ -27,19 +15,9 @@ export default async function Page() {
   );
 }
 
-const userIdQuery = gql`
-  query {
-    getUser(id: "1") {
-      id
-    }
-  }
-`;
-
 const Child = async function () {
-  const {data} = await getClient().query({
-    query: userIdQuery,
-    context: {fetchOptions: {cache: "force-cache"}},
-  });
+  const res = await fetch(endpoint);
+  const data = await res.json();
 
   return (
     <div>
