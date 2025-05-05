@@ -10,7 +10,7 @@ export default async function Page() {
 
   return (
     <>
-      <p>data received during Home render: {JSON.stringify(data)}</p>
+      <p>data received during Page render: {JSON.stringify(data)}</p>
       <Child />
       <Link href="/">Home</Link>
     </>
