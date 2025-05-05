@@ -34,6 +34,7 @@ const userIdQuery = gql`
 `;
 
 const Child = async function () {
+  // Pageコンポーネントで実行したQueryのキャッシュがあるので、リクエストは実行されない
   const {data} = await getClient().query({query: userIdQuery});
 
   return (

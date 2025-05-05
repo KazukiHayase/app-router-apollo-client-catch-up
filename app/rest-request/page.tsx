@@ -18,6 +18,7 @@ export default async function Page() {
 }
 
 const Child = async function () {
+  // Request Memoizationにより、リクエストは実行されない
   const res = await fetch(endpoint);
   const data = await res.json();
 
