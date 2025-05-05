@@ -2,8 +2,6 @@ import gql from "graphql-tag";
 import {getClient} from "@/app/ApolloClient";
 import Link from "next/link";
 
-export const revalidate = 10;
-
 const userQuery = gql`
   query {
     getUser(id: "1") {
@@ -14,7 +12,14 @@ const userQuery = gql`
 `;
 
 export default async function Page() {
-  const {data} = await getClient().query({query: userQuery});
+  const {data} = await getClient().query({
+    query: userQuery,
+    context: {
+      fetchOptions: {
+        next: {revalidate: 10},
+      },
+    },
+  });
 
   return (
     <>
