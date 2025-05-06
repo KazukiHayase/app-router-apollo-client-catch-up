@@ -33,9 +33,5 @@ const Child = async function () {
   // Pageコンポーネントで実行したQueryのキャッシュがあるので、リクエストは実行されない
   const {data} = await getClient().query({query: userIdQuery});
 
-  return (
-    <div>
-      <p>data received during Child render: {JSON.stringify(data)}</p>
-    </div>
-  );
+  return <p>data received during Child render: {JSON.stringify(data)}</p>;
 };
